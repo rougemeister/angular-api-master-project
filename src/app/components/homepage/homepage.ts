@@ -18,6 +18,8 @@ export class Homepage implements OnInit {
  apiService: ApiService = inject(ApiService);
  currentPage: number = 1;
  totalPages: number = 10; 
+ error: boolean = true;
+ 
  readonly pageSize: number = 8; 
 
 

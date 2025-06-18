@@ -1,0 +1,29 @@
+
+
+<div class="post-details-container">
+<div>
+          <button (click)="goBack()">Go back</button>
+ </div>
+<div class="post-detail">
+
+  <img [src]="post?.imageUrl" alt="{{ post?.title }}" />
+  <div class="details-content">
+    <h2>{{ post?.title }}</h2>
+  <p>{{ post?.body }}</p>
+  <h3>Comments ({{post?.comments?.length || undefined}})</h3>
+  <div class="comments">
+    @for(comment of post?.comments; track comment.id) {
+      <div class="comment">
+          <div class="profile-image"><h4>{{comment.email[0]}}</h4></div>
+          <div class="text-content">
+          <h3>{{ comment.name }}</h3>
+          <p>{{ comment.body }}</p>
+          </div>
+      </div>
+    }
+  </div>
+  </div>
+
+
+
+</div>

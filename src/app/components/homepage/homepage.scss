@@ -4,6 +4,7 @@
 
 .posts-container {
     overflow-y: auto;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -16,4 +17,42 @@
        @include flex (row, center, stretch, wrap, 25px);
        overflow-y: auto;
     }
+}
+
+
+.loader-container {
+    height: 80vh;
+    @include flex (
+        column,
+        center,
+        center
+
+    )
+}
+
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: 50px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 8px solid #0000;
+  border-right-color: #000000fd;
+  position: relative;
+  animation: l24 1s infinite linear;
+}
+.loader:before,
+.loader:after {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: inherit;
+  animation: inherit;
+  animation-duration: 2s;
+}
+.loader:after {
+  animation-duration: 4s;
+}
+@keyframes l24 {
+  100% {transform: rotate(1turn)}
 }

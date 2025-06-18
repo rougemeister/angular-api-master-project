@@ -1,0 +1,95 @@
+@use '../../../styles/partials/mixins' as *;
+@use '../../../styles/partials/variables' as *;
+
+
+
+.post-details-container{
+        padding: 20px;
+}
+
+.post-detail{
+    background-color: rgb(202, 220, 202);
+    @include flex (
+        column,
+        center,
+        stretch,
+        nowrap,
+        15px
+    );
+
+    .details-content{
+        padding:  25px;
+        
+        @include flex (
+            column,
+            flex-start,
+            stretch,
+            nowrap,
+            15px
+        );
+        width: 100%;
+        h2 {
+            line-height: 1.2;
+        }
+    }
+
+    .comments{
+        height: 400px;
+        overflow-y: auto;
+        @include flex (
+            column,
+            flex-start,
+            stretch,
+            nowrap,
+            15px
+        );
+        padding: 10px 0;
+    }
+
+        .comment{
+            padding: 10px;
+            font-size: 0.65rem;
+            @include flex (
+                row,
+                flex-start,
+                flex-start,
+                nowrap,
+     
+            );
+            width: 100%;
+            h3 {
+                line-height: 1.2;
+            }
+            .text-content {
+                border-radius: 5px;
+                border-top-left-radius: 0;
+                background-color: rgb(225, 245, 217);
+                padding: 15px;
+            }
+          
+
+        }
+    .profile-image {
+        font-weight: bold;
+        color: $text-color;
+        background-color: rgb(225, 245, 217);
+        padding: 15px;
+        font-weight: 900;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+
+    }
+}
+
+@media screen and (min-width: 680px){
+.post-detail{
+    font-size: .8rem;
+    flex-direction: row; 
+    height: 400px;
+    width: 700px;  
+    img {
+        width: 40%;
+    }
+    margin: auto;
+}
+}

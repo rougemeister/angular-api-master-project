@@ -13,6 +13,7 @@ export class Pagination {
   @Input() totalPages = 1;
 
   @Output() pageChange = new EventEmitter<number>();
+Array: any;
 
   goToPage(page: number) {
     if (page >= 1 && page <= this.totalPages) {

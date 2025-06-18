@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Input } from '@angular/core';
 import {  PostWithImage } from '../../core/model/model';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-posts',
@@ -10,7 +11,11 @@ import { CommonModule } from '@angular/common';
   styleUrl: './posts.scss'
 })
 export class Posts {
+  route = inject(Router);
   @Input() 
   post!: PostWithImage
 
+  goToDetailPost(): void {
+    this.route.navigate(['/posts', this.post.id]);
+}
 }
