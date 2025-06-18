@@ -6,16 +6,13 @@
 
 
 body {
-    background: url('../public/yellowbg.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;   
+    background-color: white;
 
 }
 
 button {
-    padding: 10px 15px;
-    color: white;
+    padding: 7px 10px;
     background-color: $button-color;
-
+    color: white;
+    font-weight: bold;
 }
