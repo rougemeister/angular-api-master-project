@@ -1,1 +1,21 @@
-/* You can add global styles to this file, and also import other style files */
+@use './styles/partials/font' as *;
+@use './styles/partials/reset' as *;
+@use './styles/partials/variables' as *;
+@use './styles/partials/mixins' as *;
+
+
+
+body {
+    background: url('../public/yellowbg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;   
+
+}
+
+button {
+    padding: 10px 15px;
+    color: white;
+    background-color: $button-color;
+
+}
