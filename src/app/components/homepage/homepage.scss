@@ -3,9 +3,17 @@
 @use '../../../styles/partials/font' as *;
 
 .posts-container {
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
     gap: 16px;
     padding: 30px;
+    background-color: rgba(222, 222, 205, 0.112);
+}
 
+@media screen and (min-width: 480px) {
+    .posts-container {
+       @include flex (row, center, stretch, wrap, 25px);
+       overflow-y: auto;
+    }
 }

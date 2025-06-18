@@ -1,6 +1,13 @@
-
-<div class="posts-container">
-@for(post of posts$ | async; track post.id) {
-     <app-posts [post]="post" />
-}
-</div>
+<main>
+     <div class="posts-container">
+          @for(post of posts$ | async; track post.id) {
+               <app-posts [post]="post" />
+          }
+           
+     </div>
+    <app-pagination
+        [currentPage]="currentPage"
+        [totalPages]="totalPages"
+        (pageChange)="loadPage($event)"
+    ></app-pagination>
+</main>
