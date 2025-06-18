@@ -1,0 +1,43 @@
+@use '../../../styles/partials/mixins' as *;
+
+.post {
+    box-shadow: inset;
+    @include flex (
+        column,
+        flex-start,
+        stretch,
+        nowrap,
+    );
+    background-color: rgb(255, 255, 255);
+    .content {
+        padding: 25px;
+        @include flex (
+            column,
+            flex-start,
+            flex-start,
+            nowrap,
+            16px
+        );
+        h2 {
+            line-height: 1;
+        }
+    }
+   
+}
+.image {
+    height: 200px;
+}
+
+.image::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.5s ease;
+  z-index: 0;
+}
+
+.image:hover::before {
+  transform: scale(1.1);
+}

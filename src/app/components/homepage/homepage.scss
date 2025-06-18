@@ -1,0 +1,11 @@
+@use '../../../styles/partials/mixins' as *;    
+@use '../../../styles/partials/variables' as *;
+@use '../../../styles/partials/font' as *;
+
+.posts-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 30px;
+
+}

@@ -1,0 +1,11 @@
+<div class="post">
+    <div class="image" aria-label="card image" role="img"  
+    [style.background]="post.imageUrl ? 'url(' + post.imageUrl + ')' : ''"
+>
+    </div>
+    <div class="content">
+        <h2 class="title">{{post.title}}</h2>
+        <p>{{ post.body }}</p>
+        <button>Read more</button>
+    </div>
+</div>
