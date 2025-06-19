@@ -35,6 +35,12 @@
           },
           "configurations": {
             "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
               "budgets": [
                 {
                   "type": "initial",
@@ -47,12 +53,51 @@
                   "maximumError": "8kB"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "optimization": true,
+              "sourceMap": false,
+              "extractLicenses": true,
+              "namedChunks": false,
+              "aot": true
+            },
+            "staging": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.staging.ts"
+                }
+              ],
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "750kB",
+                  "maximumError": "1.5MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kB",
+                  "maximumError": "10kB"
+                }
+              ],
+              "outputHashing": "all",
+              "optimization": true,
+              "sourceMap": true,
+              "extractLicenses": false,
+              "namedChunks": true,
+              "aot": true
             },
             "development": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dev.ts"
+                }
+              ],
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "namedChunks": true,
+              "aot": false
             }
           },
           "defaultConfiguration": "production"
@@ -62,6 +107,9 @@
           "configurations": {
             "production": {
               "buildTarget": "angular-api-master-project:build:production"
+            },
+            "staging": {
+              "buildTarget": "angular-api-master-project:build:staging"
             },
             "development": {
               "buildTarget": "angular-api-master-project:build:development"
