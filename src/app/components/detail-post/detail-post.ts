@@ -34,5 +34,9 @@ export class DetailPost implements OnInit {
   goBack():void {
     this.router.navigate(['posts'])
   }
-deletePost(){}
+  deletePost() {
+    if (this.post && this.post.id !== undefined) {
+      this.apiService.deletePost(this.post.id);
+    }
+  }
 }

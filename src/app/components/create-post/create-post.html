@@ -1,1 +1,68 @@
-<p>create-post works!</p>
+<form
+  #postForm="ngForm"
+  class="post-create-form"
+  (ngSubmit)="onSubmit(postForm)"
+  novalidate
+>
+  <!-- Post Title -->
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input
+      id="title"
+      name="title"
+      [(ngModel)]="post.title"
+      required
+      minlength="5"
+      [appNoProfanity]="profanityList"
+      #title="ngModel"
+    />
+    <div class="error" *ngIf="title.invalid && title.touched">
+      <small *ngIf="title.errors?.['required']">Title is required.</small>
+      <small *ngIf="title.errors?.['minlength']">Minimum 5 characters.</small>
+      <small *ngIf="title.errors?.['profanity']">Inappropriate word used.</small>
+    </div>
+  </div>
+
+  <!-- Post Body -->
+  <div class="form-group">
+    <label for="body">Body</label>
+    <textarea
+      id="body"
+      name="body"
+      [(ngModel)]="post.body"
+      required
+      minlength="10"
+      [appNoProfanity]="profanityList"
+      #body="ngModel"
+    ></textarea>
+    <div class="error" *ngIf="body.invalid && body.touched">
+      <small *ngIf="body.errors?.['required']">Body is required.</small>
+      <small *ngIf="body.errors?.['minlength']">Minimum 10 characters.</small>
+      <small *ngIf="body.errors?.['profanity']">Inappropriate word used.</small>
+    </div>
+  </div>
+
+  <!-- User ID (Optional - for API compatibility) -->
+  <div class="form-group">
+    <label for="userId">User ID</label>
+    <input
+      id="userId"
+      name="userId"
+      type="number"
+      [(ngModel)]="post.userId"
+      required
+      min="1"
+      #userId="ngModel"
+    />
+    <div class="error" *ngIf="userId.invalid && userId.touched">
+      <small *ngIf="userId.errors?.['required']">User ID is required.</small>
+      <small *ngIf="userId.errors?.['min']">User ID must be at least 1.</small>
+    </div>
+  </div>
+
+  <!-- Submit Post -->
+  <div class="form-actions">
+    <button type="submit" [disabled]="postForm.invalid">Create Post</button>
+    <button type="button" (click)="onCancel()" class="cancel-btn">Cancel</button>
+  </div>
+</form>

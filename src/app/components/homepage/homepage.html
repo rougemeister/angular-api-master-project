@@ -1,3 +1,8 @@
+<app-header
+  (createPost)="navigateToCreateForm()"
+  (search)="onSearch($event)"
+  (categoryChange)="onCategoryChange($event)"
+></app-header>
 <main>
      @if(posts$ | async){
      <div class="posts-container">
