@@ -6,7 +6,6 @@ export interface Post {
   comments?: Comment[];
 }
 
-
 export interface PostWithImage extends Post {
   imageUrl: string;
 }

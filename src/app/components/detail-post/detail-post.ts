@@ -25,10 +25,14 @@ export class DetailPost implements OnInit {
     }
 
   }
+  
+ goToEditPost(): void {
+    if (this.post && this.post.id !== undefined) {
+      this.router.navigate(['/edit', this.post.id]);
+    }
+}
   goBack():void {
     this.router.navigate(['posts'])
   }
-
- 
-
+deletePost(){}
 }

@@ -1,0 +1,92 @@
+@use '../../../styles/partials/mixins' as *;
+@use '../../../styles/partials/variables' as *;
+
+.post-edit-form {
+  margin-top: 2rem;
+  background-color: rgb(250, 255, 250);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  @include flex(column, flex-start, stretch, nowrap, 20px);
+
+  label {
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: $text-color;
+  }
+
+  input,
+  textarea {
+    padding: 10px;
+    border: 1px solid $border-color;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    width: 100%;
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  small {
+    color: $danger-color;
+    font-size: 0.7rem;
+  }
+
+  .comments-section {
+    @include flex(column, flex-start, stretch, nowrap, 10px);
+    margin-top: 20px;
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+      li {
+        background-color: rgb(240, 255, 240);
+        padding: 8px;
+        border-left: 3px solid $border-color;
+        border-radius: 4px;
+        font-size: 0.8rem;
+      }
+    }
+  }
+
+  .add-comment {
+    @include flex(column, flex-start, stretch, nowrap, 10px);
+    margin-top: 10px;
+
+    input,
+    textarea {
+      background-color: #f9f9f9;
+    }
+
+    button {
+      align-self: flex-start;
+      padding: 8px 12px;
+      background-color: $primary-color;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
+      &:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  button[type='submit'] {
+    background-color: $primary-color;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    &:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+  }
+}

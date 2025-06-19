@@ -28,6 +28,11 @@
 }
 
 
+.post:hover,
+.post:active {
+    transform: scale(1.01);
+}
+
 .image {
     height: 300px;
     width: 100%;
@@ -43,7 +48,7 @@
         font-size: 0.5rem;
         .content {
             padding: 10px;
-            height: 60%;
+            height: 50%;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -59,15 +64,28 @@
         background-repeat: no-repeat;
        flex-grow: 0;
     }
+    .buttons {
+        
+    width: 100%;
+    gap: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+        flex-basis: 1;
+    .btn {
+        font-size: 0.6rem;
+        flex-grow: 1;
+    }
+}
 
 }
 
 
 .btn-border-reveal {
-    font-size: 0.6rem;
+ 
+  border: 1px solid black;
   background-color: transparent;
   color: #000000;
-  border: 2px solid #000000;
   position: relative;
 }
 

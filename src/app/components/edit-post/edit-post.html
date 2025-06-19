@@ -1,1 +1,105 @@
-<p>edit-post works!</p>
+<form
+  *ngIf="post"
+  #postForm="ngForm"
+  class="post-edit-form"
+  (ngSubmit)="onSubmit(postForm)"
+  novalidate
+>
+  <!-- Post Title -->
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input
+      id="title"
+      name="title"
+      [(ngModel)]="post.title"
+      required
+      minlength="5"
+      [appNoProfanity]="profanityList"
+      #title="ngModel"
+    />
+    <div class="error" *ngIf="title.invalid && title.touched">
+      <small *ngIf="title.errors?.['required']">Title is required.</small>
+      <small *ngIf="title.errors?.['minlength']">Minimum 5 characters.</small>
+      <small *ngIf="title.errors?.['profanity']">Inappropriate word used.</small>
+    </div>
+  </div>
+
+  <!-- Post Body -->
+  <div class="form-group">
+    <label for="body">Body</label>
+    <textarea
+      id="body"
+      name="body"
+      [(ngModel)]="post.body"
+      required
+      minlength="10"
+      [appNoProfanity]="profanityList"
+      #body="ngModel"
+    ></textarea>
+    <div class="error" *ngIf="body.invalid && body.touched">
+      <small *ngIf="body.errors?.['required']">Body is required.</small>
+      <small *ngIf="body.errors?.['minlength']">Minimum 10 characters.</small>
+      <small *ngIf="body.errors?.['profanity']">Inappropriate word used.</small>
+    </div>
+  </div>
+
+  <!-- Existing Comments -->
+  <div class="comments-section" *ngIf="post.comments?.length">
+    <h3>Comments</h3>
+    <ul>
+      <li *ngFor="let comment of post.comments">
+        <strong>{{ comment.name }}</strong>: {{ comment.body }}
+      </li>
+    </ul>
+  </div>
+
+  <!-- Add Comment (Standalone) -->
+  <div class="add-comment">
+    <h3>Add a Comment</h3>
+
+    <div class="form-group">
+      <label for="commentName">Name</label>
+      <input
+        id="commentName"
+        name="commentName"
+        [(ngModel)]="newComment.name"
+        #commentName="ngModel"
+        required
+        minlength="2"
+      />
+      <div class="error" *ngIf="commentName.invalid && commentName.touched">
+        <small *ngIf="commentName.errors?.['required']">Name is required.</small>
+        <small *ngIf="commentName.errors?.['minlength']">Min 2 characters.</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="commentBody">Comment</label>
+      <textarea
+        id="commentBody"
+        name="commentBody"
+        [(ngModel)]="newComment.body"
+        #commentBody="ngModel"
+        required
+        minlength="5"
+      ></textarea>
+      <div class="error" *ngIf="commentBody.invalid && commentBody.touched">
+        <small *ngIf="commentBody.errors?.['required']">Comment is required.</small>
+        <small *ngIf="commentBody.errors?.['minlength']">Min 5 characters.</small>
+      </div>
+    </div>
+
+    <button
+      type="button"
+      (click)="addComment()"
+      [disabled]="commentName.invalid || commentBody.invalid"
+    >
+      Add Comment
+    </button>
+  </div>
+
+  <!-- Submit Post -->
+  <div class="form-actions">
+    <button type="submit" [disabled]="postForm.invalid">Submit Post</button>
+  </div>
+</form>

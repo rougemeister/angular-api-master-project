@@ -18,4 +18,8 @@ export class Posts {
   goToDetailPost(): void {
     this.route.navigate(['/posts', this.post.id]);
 }
+
+ goToEditPost(): void {
+    this.route.navigate(['/edit', this.post.id]);
+}
 }
