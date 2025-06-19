@@ -1,0 +1,16 @@
+<header class="header">
+  <div class="left">
+    <button class="create-btn" (click)="triggerCreate()">+ Create Post</button>
+  </div>
+
+  <div class="center">
+    <input
+      type="text"
+      [(ngModel)]="searchTerm"
+      (input)="onSearch()"
+      placeholder="Search by title..."
+    />
+  </div>
+
+ 
+</header>

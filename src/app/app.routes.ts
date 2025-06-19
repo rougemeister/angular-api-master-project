@@ -10,7 +10,7 @@ export const routes: Routes = [
         loadComponent: () => import('./components/homepage/homepage').then(m => m.Homepage)
     },
     {
-        path: 'new-post',
+        path: 'create',
         component: CreatePost
     },
     {
