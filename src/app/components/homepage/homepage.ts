@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable, of } from 'rxjs';
 import { OnInit, inject } from '@angular/core';   
 import { ApiService } from '../../core/services/api-service';
 import { Post, PostWithImage } from '../../core/model/model';
@@ -26,12 +26,18 @@ export class Homepage implements OnInit {
   ngOnInit(): void {
     this.loadPage(this.currentPage);
   }
+loadPage(page: number): void {
+  this.currentPage = page;
+  this.error = false;
 
-  loadPage(page: number): void {
-    this.currentPage = page;
-    this.posts$ = this.apiService.getPaginatedPostsWithImages(this.currentPage, this.pageSize);
-  }
-
+  this.posts$ = this.apiService.getPaginatedPostsWithImages(page, this.pageSize).pipe(
+    catchError(err => {
+      console.error('Error loading posts:', err);
+      this.error = true; // Show error in UI
+      return of([]); // Return empty list to prevent template from breaking
+    })
+  );
+}
    goToNextPage(): void {
     if (this.currentPage < this.totalPages) {
       this.loadPage(this.currentPage + 1);

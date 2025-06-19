@@ -1,15 +1,16 @@
 <main>
      @if(posts$ | async){
      <div class="posts-container">
-        
           @for(post of posts$ | async; track post.id) {
                <app-posts [post]="post" />
           }
       </div>
           } @else if (error) {
-          <div class="loader-container">
-               <div class="loader"></div>
-          </div>
+              <div class="error">something went wrong <div>Retry here</div></div>
+          } @else {
+               <div class="loader-container">
+                    <div class="loader"></div>
+               </div>
           }
   
     <app-pagination

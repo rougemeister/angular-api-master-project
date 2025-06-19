@@ -26,7 +26,7 @@ button[disabled] {
 }
 
 
-@media screen and (min-width) {
+@media screen and (min-width: 680px) {
     .page-button {
         display: block;
     }
