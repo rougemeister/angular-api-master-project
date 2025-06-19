@@ -23,9 +23,7 @@ export class HeaderComponent {
     this.search.emit(this.searchTerm);
   }
 
-  onCategoryChange(): void {
-    this.categoryChange.emit(this.selectedCategory);
-  }
+ 
 
   triggerCreate(): void {
     this.createPost.emit();

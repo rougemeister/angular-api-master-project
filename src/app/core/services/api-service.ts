@@ -14,8 +14,8 @@ export class ApiService {
 
   private readonly CACHE_KEY = 'cachedPosts';
   private readonly CACHE_TIME_KEY = 'cacheTimestamp';
-  private readonly LOCAL_POSTS_KEY = 'localPosts'; // For user-created posts
-  private readonly CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
+  private readonly LOCAL_POSTS_KEY = 'localPosts'; 
+  private readonly CACHE_DURATION = 5 * 60 * 1000; 
   private nextLocalId = 101; // Start local IDs from 101
 
   private handleError = (operation: string) => (error: HttpErrorResponse) => {
@@ -24,8 +24,7 @@ export class ApiService {
     return throwError(() => new Error(message));
   };
 
-  // ──────── Caching Helpers ────────
-
+  
   private cachePosts(posts: PostWithImage[]): void {
     localStorage.setItem(this.CACHE_KEY, JSON.stringify(posts));
     localStorage.setItem(this.CACHE_TIME_KEY, Date.now().toString());
@@ -42,7 +41,6 @@ export class ApiService {
     return cached ? JSON.parse(cached) : [];
   }
 
-  // ──────── Local Posts Management ────────
 
   private getLocalPosts(): PostWithImage[] {
     const localPosts = localStorage.getItem(this.LOCAL_POSTS_KEY);
@@ -56,12 +54,12 @@ export class ApiService {
   private getAllPosts(): PostWithImage[] {
     const cached = this.getCachedPosts();
     const local = this.getLocalPosts();
-    // Merge and sort by ID descending (newest first)
+ 
     return [...local, ...cached].sort((a, b) => b.id - a.id);
   }
 
   private isLocalPost(id: number): boolean {
-    return id >= 101; // Local posts start from ID 101
+    return id >= 101; 
   }
 
   clearCache(): void {
@@ -73,8 +71,7 @@ export class ApiService {
     localStorage.removeItem(this.LOCAL_POSTS_KEY);
   }
 
-  // ──────── GET METHODS ────────
-
+ 
   getPostsWithImages(): Observable<PostWithImage[]> {
     const allPosts = this.getAllPosts();
     if (allPosts.length) return of(allPosts);
@@ -87,7 +84,7 @@ export class ApiService {
         comments: []
       }))),
       tap(posts => this.cachePosts(posts)),
-      map(posts => this.getAllPosts()), // Return merged posts
+      map(posts => this.getAllPosts()), 
       catchError(this.handleError('getPostsWithImages'))
     );
   }
@@ -119,17 +116,17 @@ export class ApiService {
   }
 
   getPostByIdWithImage(id: number): Observable<PostWithImage> {
-    // Check local posts first
+ 
     if (this.isLocalPost(id)) {
       const localPost = this.getLocalPosts().find(p => p.id === id);
       if (localPost) return of(localPost);
     }
 
-    // Check cache
+  
     const cached = this.getCachedPosts().find(p => p.id === id);
     if (cached) return of(cached);
 
-    // Fetch from API (only for server posts)
+   
     if (!this.isLocalPost(id)) {
       return this.http.get<Post>(`${API_URL}/${id}`).pipe(
         retry(2),
@@ -148,7 +145,7 @@ export class ApiService {
   getPostByIdWithImageAndComments(id: number): Observable<PostWithImage> {
     const post$ = this.getPostByIdWithImage(id);
     
-    // Only fetch comments from API for server posts
+
     if (!this.isLocalPost(id)) {
       const comments$ = this.http.get<Comment[]>(`${API_URL}/${id}/comments`);
       return forkJoin([post$, comments$]).pipe(
@@ -157,14 +154,12 @@ export class ApiService {
       );
     }
 
-    // For local posts, just return the post (comments are already included)
+  
     return post$;
   }
 
-  // ──────── CREATE / UPDATE / DELETE ────────
-
   createPost(post: Post): Observable<Post> {
-    // Always create locally since JSONPlaceholder doesn't persist
+
     const newPost: PostWithImage = {
       ...post,
       id: this.nextLocalId++,
@@ -175,16 +170,16 @@ export class ApiService {
     const localPosts = this.getLocalPosts();
     this.saveLocalPosts([newPost, ...localPosts]);
 
-    // Also simulate API call for consistency (optional)
+
     return this.http.post<Post>(API_URL, post).pipe(
-      map(() => newPost), // Return our local post instead of API response
-      catchError(() => of(newPost)) // If API fails, still return local post
+      map(() => newPost), 
+      catchError(() => of(newPost)) 
     );
   }
 
   updatePost(id: number, updatedPost: Post): Observable<Post> {
     if (this.isLocalPost(id)) {
-      // Update local post
+   
       const localPosts = this.getLocalPosts();
       const index = localPosts.findIndex(p => p.id === id);
       
@@ -205,10 +200,9 @@ export class ApiService {
       return of(updated);
     }
 
-    // For server posts (ID <= 100), try API first, then fall back to local update
     return this.http.put<Post>(`${API_URL}/${id}`, updatedPost).pipe(
       tap(() => {
-        // Update cache if API succeeds
+      
         const cached = this.getCachedPosts();
         const index = cached.findIndex(p => p.id === id);
         if (index !== -1) {
@@ -223,10 +217,10 @@ export class ApiService {
         }
       }),
       catchError((error) => {
-        // If API fails, update locally
+       
         console.warn('API update failed, updating locally:', error);
         
-        // Move to local storage for future persistence
+     
         const post = this.getCachedPosts().find(p => p.id === id);
         if (post) {
           const updatedLocal: PostWithImage = {
@@ -255,42 +249,37 @@ export class ApiService {
   const isLocal = this.isLocalPost(id);
 
   if (isLocal) {
-    // Delete from local posts
+  
     const updatedLocal = this.getLocalPosts().filter(p => p.id !== id);
     this.saveLocalPosts(updatedLocal);
   } else {
-    // Delete from cached server posts
     const updatedCache = this.getCachedPosts().filter(p => p.id !== id);
     this.cachePosts(updatedCache);
   }
 
-  // Try API deletion for server posts, fallback to local deletion
+
   if (!isLocal) {
     return this.http.delete<void>(`${API_URL}/${id}`).pipe(
       tap(() => console.log(`Deleted server post ID: ${id}`)),
       catchError(err => {
         console.warn(`Failed to delete on server, removed from cache only.`, err);
-        return of(undefined); // still successful
+        return of(undefined); 
       })
     );
   }
 
-  return of(undefined); // for local posts
+  return of(undefined); 
 }
 
-  // ──────── Utility Methods ────────
-
-  /**
-   * Add a comment to a post (local only)
-   */
+ 
   addCommentToPost(postId: number, comment: Comment): Observable<Comment> {
     const newComment: Comment = {
       ...comment,
-      id: Date.now(), // Generate temporary ID
+      id: Date.now(), 
       postId
     };
 
-    // Update appropriate storage
+    
     if (this.isLocalPost(postId)) {
       const localPosts = this.getLocalPosts();
       const index = localPosts.findIndex(p => p.id === postId);

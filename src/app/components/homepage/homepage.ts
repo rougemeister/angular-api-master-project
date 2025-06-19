@@ -7,6 +7,7 @@ import { Posts } from "../posts/posts";
 import { AsyncPipe, NgIf, NgFor } from '@angular/common';
 import { Pagination } from '../pagination/pagination';
 import { HeaderComponent } from "../header/header";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-homepage',
@@ -18,9 +19,10 @@ import { HeaderComponent } from "../header/header";
 export class Homepage implements OnInit {
   posts$!: Observable<PostWithImage[]>;
   apiService = inject(ApiService);
+  router = inject(Router)
   currentPage = 1;
   totalPages = 10;
-  readonly pageSize = 8;
+  readonly pageSize = 10;
   error = false;
 
   searchTerm: string = '';
@@ -28,6 +30,7 @@ export class Homepage implements OnInit {
 
   ngOnInit(): void {
     this.loadPage(this.currentPage);
+
   }
 
   loadPage(page: number): void {
@@ -62,8 +65,7 @@ export class Homepage implements OnInit {
   }
 
   navigateToCreateForm(): void {
-    // This assumes routing is set up
-    window.location.href = '/create'; // Or use Angular router if preferred
+   this.router.navigate(['/create'])
   }
 
   goToNextPage(): void {
