@@ -3,6 +3,7 @@ import { Posts } from './components/posts/posts';
 import { DetailPost } from './components/detail-post/detail-post';
 import { EditPost } from './components/edit-post/edit-post';
 import { CreatePost } from './components/create-post/create-post';
+import { Login } from './components/login/login';
 
 export const routes: Routes = [
     {
@@ -20,6 +21,9 @@ export const routes: Routes = [
     {
         path: 'edit/:id',
         component: EditPost
+    }, {
+        path: 'login',
+        component: Login
     },
     {
         path: '**',
