@@ -6,13 +6,13 @@ import { PostWithImage } from '../../core/model/model';
 import { Posts } from "../posts/posts";
 import { AsyncPipe, NgIf, NgFor } from '@angular/common';
 import { Pagination } from '../pagination/pagination';
-import { HeaderComponent } from "../header/header";
+import { Header } from "../header/header";
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-homepage',
   standalone: true,
-  imports: [Posts, AsyncPipe, Pagination, HeaderComponent],
+  imports: [Posts, AsyncPipe, Pagination, Header],
   templateUrl: './homepage.html',
   styleUrl: './homepage.scss'
 })

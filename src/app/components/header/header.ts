@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './header.html',
   styleUrls: ['./header.scss']
 })
-export class HeaderComponent {
+export class Header{
   @Output() createPost = new EventEmitter<void>();
   @Output() search = new EventEmitter<string>();
   @Output() categoryChange = new EventEmitter<string>();
