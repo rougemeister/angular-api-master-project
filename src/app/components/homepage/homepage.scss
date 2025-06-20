@@ -22,11 +22,13 @@ main{
     .posts-container {
        @include flex (row, center, stretch, wrap, 25px);
        overflow-y: auto;
+       height: 80vh;
     }
 }
 
 
-.loader-container {
+.loader-container,
+.error {
     height: 80vh;
     @include flex (
         column,
@@ -36,7 +38,7 @@ main{
     )
 }
 
-/* HTML: <div class="loader"></div> */
+
 .loader {
   width: 50px;
   aspect-ratio: 1;

@@ -9,7 +9,7 @@
           @for(post of posts$ | async; track post.id) {
                <app-posts [post]="post" />
           }@empty {
-               <div>Something went wrong <button (click)="reload()">Retry Here</button></div>
+               <div class="error"><div>{{errorMsg}}<button (click)="reload()">Retry Here</button></div></div>
           }
      </div>
           } @else {

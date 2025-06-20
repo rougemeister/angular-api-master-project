@@ -36,4 +36,7 @@ export class Login {
       }
     }
   }
+  goBack(): void {
+    this.router.navigate(['/'])
+  }
 }

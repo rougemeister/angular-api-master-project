@@ -1,4 +1,7 @@
+
 <main class="login-page">
+ <div class="login-picture">
+ </div>
 <form class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
   <h2>Login</h2>
 
@@ -25,5 +28,8 @@
   </div>
 
   <button type="submit" [disabled]="form.invalid">Login</button>
+  <p class="go-back" style="text-align: center;">Don't wanna sign in, 
+    <span style="color: blue; text-decoration: underline; cursor: pointer;"
+    (click)="goBack()">Go back</span></p>
 </form>
 </main>

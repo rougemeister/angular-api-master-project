@@ -13,11 +13,18 @@
 
 
 
+
+
 .page-button {
-    background-color:white;
+    background-color:rgb(239, 235, 235);
     color: black;
     width: 40px;
     display: none;
+}
+
+
+button:hover {
+   transform: scale(1.05);
 }
 
 button[disabled] {

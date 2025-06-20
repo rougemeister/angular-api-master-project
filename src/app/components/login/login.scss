@@ -3,7 +3,7 @@
     height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: stretch;
 }
 
 form {
@@ -11,10 +11,12 @@ form {
     flex-direction: column;
     justify-content: center;
     gap: 18px;
-    border: 1px solid gray;
     border-radius: 6px;
     padding: 35px;
-    margin: 10px;
+}
+
+.login-picture {
+    background: url('../../../../public/yellowbg.jpg');
 }
 
 
@@ -24,7 +26,6 @@ form {
 input {
     width: 100%;
     padding: 10px 15px;
-    border-radius: 8px;
     border: 1px solid rgb(198, 185, 185);
     outline: none;
 }

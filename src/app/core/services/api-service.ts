@@ -51,7 +51,7 @@ export class ApiService {
     localStorage.setItem(this.LOCAL_POSTS_KEY, JSON.stringify(posts));
   }
 
-  private getAllPosts(): PostWithImage[] {
+  public getAllPosts(): PostWithImage[] {
     const cached = this.getCachedPosts();
     const local = this.getLocalPosts();
  
