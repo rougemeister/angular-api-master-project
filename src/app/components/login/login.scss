@@ -1,0 +1,39 @@
+.login-page {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form {
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 18px;
+    border: 1px solid gray;
+    border-radius: 6px;
+    padding: 35px;
+}
+
+
+.input-wrapper {
+    position: relative;
+}
+input {
+    width: 100%;
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: 1px solid rgb(198, 185, 185);
+    outline: none;
+}
+
+small {
+    position: absolute;
+    font-size: 10px;
+    top: 15px;
+    right: 10px;
+    color: red;
+    background-color: white;
+    padding:0 2px;
+}
