@@ -24,6 +24,7 @@ export class Homepage implements OnInit {
   totalPages = 10;
   readonly pageSize = 10;
   error = false;
+  errorMsg: string = ''
 
   searchTerm: string = '';
   selectedCategory: string = '';
@@ -41,6 +42,7 @@ export class Homepage implements OnInit {
       map(posts => this.filterPosts(posts)),
       catchError(err => {
         console.error('Error loading posts:', err);
+        this.errorMsg = err
         this.error = true;
         return of([]);
       })
@@ -78,5 +80,9 @@ export class Homepage implements OnInit {
     if (this.currentPage > 1) {
       this.loadPage(this.currentPage - 1);
     }
+  }
+
+  reload():void{
+    window.location.reload()
   }
 }

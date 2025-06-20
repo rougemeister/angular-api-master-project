@@ -1,3 +1,5 @@
+
+<div class="edit-post-container">
 <form
   *ngIf="post"
   #postForm="ngForm"
@@ -44,14 +46,20 @@
   </div>
 
   <!-- Existing Comments -->
-  <div class="comments-section" *ngIf="post.comments?.length">
-    <h3>Comments</h3>
-    <ul>
-      <li *ngFor="let comment of post.comments">
-        <strong>{{ comment.name }}</strong>: {{ comment.body }}
-      </li>
-    </ul>
+   <div class="comments">
+    @if(post.comments){
+    @for(comment of post.comments; track comment.id) {
+      <div class="comment">
+          <div class="profile-image"><h4>{{comment.email[0]}}</h4></div>
+          <div class="text-content">
+          <h3>{{ comment.name }}</h3>
+          <p>{{ comment.body }}</p>
+          </div>
+      </div>
+    }
+    }
   </div>
+
 
   <!-- Add Comment (Standalone) -->
   <div class="add-comment">
@@ -103,3 +111,4 @@
     <button type="submit" [disabled]="postForm.invalid">Submit Post</button>
   </div>
 </form>
+</div>

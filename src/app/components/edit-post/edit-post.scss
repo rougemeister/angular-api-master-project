@@ -1,9 +1,13 @@
 @use '../../../styles/partials/mixins' as *;
 @use '../../../styles/partials/variables' as *;
 
+
+
 .post-edit-form {
+  width: 100%;
+  height: 100%;
   margin-top: 2rem;
-  background-color: rgb(250, 255, 250);
+  background-color: rgb(192, 209, 192);
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
@@ -22,10 +26,13 @@
     border-radius: 4px;
     font-size: 0.9rem;
     width: 100%;
+    font-family: inherit;
+    outline: none;
+    margin: 10px 0;
   }
 
   textarea {
-    resize: vertical;
+    resize: none;
     min-height: 100px;
   }
 
@@ -90,3 +97,65 @@
     }
   }
 }
+
+ .profile-image {
+        font-weight: bold;
+        color: $text-color;
+        background-color: rgb(225, 245, 217);
+        padding: 15px;
+        font-weight: 900;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+
+    }
+.comments{
+        height: 400px;
+        overflow-y: auto;
+        @include flex (
+            column,
+            flex-start,
+            stretch,
+            nowrap,
+            15px
+        );
+        padding: 10px 0;
+    }
+
+        .comment{
+            padding: 10px;
+            font-size: 0.65rem;
+            @include flex (
+                row,
+                flex-start,
+                flex-start,
+                nowrap,
+     
+            );
+            width: 100%;
+            h3 {
+                line-height: 1.2;
+            }
+            .text-content {
+                border-radius: 5px;
+                border-top-left-radius: 0;
+                background-color: rgb(225, 245, 217);
+                padding: 15px;
+            }
+          
+}
+
+
+ @media screen and (min-width: 480px) {
+
+   .edit-post-container{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      }
+     .post-edit-form {
+           
+            width: 600px;
+            height: 80hv;
+           
+          }
+    }

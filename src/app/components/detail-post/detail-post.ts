@@ -38,5 +38,8 @@ export class DetailPost implements OnInit {
     if (this.post && this.post.id !== undefined) {
       this.apiService.deletePost(this.post.id);
     }
+    this.goBack()
   }
+
+
 }

@@ -5,10 +5,11 @@
 
 .post-details-container{
         padding: 20px;
+        height: 100vh;
 }
 
 .post-detail{
-    background-color: rgb(202, 220, 202);
+     background-color: rgb(202, 220, 202);
     @include flex (
         column,
         center,
@@ -79,6 +80,18 @@
         border-bottom-left-radius: 5px;
 
     }
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    gap:5px;
+    padding-top: 15px;
+   
+    .delete {
+        background-color: rgb(225, 54, 54);
+    }
+   
 }
 
 @media screen and (min-width: 680px){

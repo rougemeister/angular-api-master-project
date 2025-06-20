@@ -179,14 +179,12 @@ export class ApiService {
 
   updatePost(id: number, updatedPost: Post): Observable<Post> {
     if (this.isLocalPost(id)) {
-   
       const localPosts = this.getLocalPosts();
       const index = localPosts.findIndex(p => p.id === id);
       
       if (index === -1) {
         return throwError(() => new Error('Post not found'));
       }
-
       const updated: PostWithImage = {
         ...updatedPost,
         id,
@@ -199,7 +197,6 @@ export class ApiService {
       
       return of(updated);
     }
-
     return this.http.put<Post>(`${API_URL}/${id}`, updatedPost).pipe(
       tap(() => {
       
@@ -217,7 +214,7 @@ export class ApiService {
         }
       }),
       catchError((error) => {
-       
+
         console.warn('API update failed, updating locally:', error);
         
      

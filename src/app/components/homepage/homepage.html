@@ -8,10 +8,10 @@
      <div class="posts-container">
           @for(post of posts$ | async; track post.id) {
                <app-posts [post]="post" />
+          }@empty {
+               <div>Something went wrong <button (click)="reload()">Retry Here</button></div>
           }
-      </div>
-          } @else if (error) {
-              <div class="error">something went wrong <div>Retry here</div></div>
+     </div>
           } @else {
                <div class="loader-container">
                     <div class="loader"></div>
