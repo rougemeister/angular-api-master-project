@@ -1,3 +1,9 @@
+.create-post {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .post-create-form {
   max-width: 600px;
   margin: 0 auto;
@@ -41,7 +47,7 @@
 
     textarea {
       min-height: 120px;
-      resize: vertical;
+      resize: none;
     }
 
     .error {
@@ -84,11 +90,11 @@
       }
 
       &.cancel-btn {
-        background-color: #6c757d;
+        background-color: #94180a;
         color: white;
 
         &:hover {
-          background-color: #5a6268;
+          background-color:  #a61809;
         }
       }
     }
@@ -96,10 +102,12 @@
 }
 
 // Responsive design
-@media (max-width: 768px) {
-  .post-create-form {
+@media screen and (min-width: 768px) {
+
+  form.post-create-form {
     margin: 1rem;
     padding: 1rem;
+    width: 500px;
 
     .form-actions {
       flex-direction: column;

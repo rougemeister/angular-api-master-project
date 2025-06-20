@@ -1,5 +1,6 @@
 
 <div class="edit-post-container">
+ 
 <form
   *ngIf="post"
   #postForm="ngForm"
@@ -7,6 +8,8 @@
   (ngSubmit)="onSubmit(postForm)"
   novalidate
 >
+  <div class="form-body">
+ <h1>Edit Post</h1>
   <!-- Post Title -->
   <div class="form-group">
     <label for="title">Title</label>
@@ -27,6 +30,7 @@
   </div>
 
   <!-- Post Body -->
+   <div  class="form-body">
   <div class="form-group">
     <label for="body">Body</label>
     <textarea
@@ -59,9 +63,11 @@
     }
     }
   </div>
-
+</div>
+</div>
 
   <!-- Add Comment (Standalone) -->
+   <div class="comment-container">
   <div class="add-comment">
     <h3>Add a Comment</h3>
 
@@ -96,7 +102,7 @@
         <small *ngIf="commentBody.errors?.['minlength']">Min 5 characters.</small>
       </div>
     </div>
-
+<div class="buttons">
     <button
       type="button"
       (click)="addComment()"
@@ -104,11 +110,14 @@
     >
       Add Comment
     </button>
+     <div class="form-actions">
+    <button type="submit" [disabled]="postForm.invalid">Submit Post</button>
+  </div>
   </div>
 
   <!-- Submit Post -->
-  <div class="form-actions">
-    <button type="submit" [disabled]="postForm.invalid">Submit Post</button>
+ 
+  </div>
   </div>
 </form>
 </div>
